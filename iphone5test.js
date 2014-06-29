@@ -72,12 +72,12 @@ function formatOutput(){
 	var output = '<?xml version="1.0" encoding="utf-8"?>\n'+
 	'<testsuite tests="'+ testsToRun.length +'">\n'
 	testsToRun.map(function(t){
-		output += '<testcase classname="'+ t +'" name="'+ results.testnames[t] +'"/>\n'
+		output += '<testcase classname="'+ t +'" name="'+ results.testnames[t] +'">\n'
 		if(results.test_results[t] == "fail"){
 			output += '<failure type="fail"> threshold: '+ results.threshold[t] + ' result: '+ results.actual[t] +' </failure>\n'
 		}
+		output += '</testcase>\n'+
 	})							    			  			        
-	output += '</testcase>\n'+
 	'</testsuite>'
 	
 	console.log(output)
