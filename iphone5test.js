@@ -76,9 +76,9 @@ function formatOutput(){
 		if(results.test_results[t] == "fail"){
 			output += '<failure type="fail"> threshold: '+ results.threshold[t] + ' result: '+ results.actual[t] +' </failure>\n'
 		}
-		output += '</testcase>\n'+
+		output += '</testcase>\n'
 	})							    			  			        
-	'</testsuite>'
+	output += '</testsuite>'
 	
 	console.log(output)
 }	
