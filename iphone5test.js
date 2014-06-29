@@ -1,5 +1,4 @@
 //simulating an iPhone 5
-console.log("simulating an iPhone 5")
 var async = require('async'),
 	testsToRun = ["rendertime","payload"],
 	results = {
@@ -24,7 +23,6 @@ var async = require('async'),
 
 
 function test(testType, callback){
-	console.log(testType)	
 	var startTime = Date.now(),
 		loadTime;
 		
@@ -63,14 +61,32 @@ function test(testType, callback){
 				results.test_results[testType] = "pass";
 			}
 	
-			console.log(results.testnames[testType] + " threshold: " + results.threshold[testType] + " actual: " + results.actual[testType] + " " + results.test_results[testType])
-		}	
-
+			//console.log(results.testnames[testType] + " threshold: " + results.threshold[testType] + " actual: " + results.actual[testType] + " " + results.test_results[testType])
+		}
+		
 }
+
+
+function formatOutput(){
+	
+	var output = '<?xml version=”1.0″ encoding=”utf-8″?>\n'+
+	'<testsuite tests="'+ testsToRun.length +'">\n'
+	testsToRun.map(function(t){
+		output += '<testcase classname="'+ t +'" name="'+ results.testnames[t] +'"/>\n'
+		if(results.test_results[t] == "fail"){
+			output += '<failure type="fail"> threshold: '+ results.threshold[t] + ' result: '+ results.actual[t] +' </failure>\n'
+		}
+	})							    			  			        
+	output += '</testcase>\n'+
+	'</testsuite>'
+	
+	console.log(output)
+}	
 
 
 async.each(testsToRun,test,
   function(err){
+	  formatOutput();
 	  phantom.exit();
   }
 );
