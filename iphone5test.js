@@ -69,7 +69,7 @@ function test(testType, callback){
 
 function formatOutput(){
 	
-	var output = '<?xml version=”1.0″ encoding=”utf-8″?>\n'+
+	var output = '<?xml version="1.0" encoding="utf-8"?>\n'+
 	'<testsuite tests="'+ testsToRun.length +'">\n'
 	testsToRun.map(function(t){
 		output += '<testcase classname="'+ t +'" name="'+ results.testnames[t] +'"/>\n'
